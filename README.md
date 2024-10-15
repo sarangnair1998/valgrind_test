@@ -22,3 +22,14 @@
   rm -rf build/
 ```
 
+# Question and Answers
+
+## What happens when the executable is linked statically?  Does Valgrind still detect those same bugs?
+
+
+Even with a statically linked executable, Valgrind can still find fundamental problems like memory leaks and uninitialized variables. On the other hand, if a bug was tied to the behavior of dynamically loaded libraries, its behavior might change, and some issues might become more difficult to find.
+
+
+## Why or why not.
+
+This occurs because the executable's overall memory structure is altered by static linking, which also incorporates all required libraries. This may mask flaws that are only visible when libraries are dynamically linked and maintained independently.

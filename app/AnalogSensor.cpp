@@ -13,10 +13,12 @@ AnalogSensor::~AnalogSensor()
 
 int AnalogSensor::Read()
 {
-    std::vector<int> *readings = new std::vector<int>(mSamples, 10);
+    // Declare the vector on the stack, not using new
+    std::vector<int> readings(mSamples, 10);  // Create a vector with 'mSamples' elements initialized to 10
 
-    double result = std::accumulate( readings->begin(), readings->end(), 0.0 ) / readings->size();
-    return result;
+    // Accumulate the readings and calculate the average
+    double result = std::accumulate(readings.begin(), readings.end(), 0.0) / readings.size();
+
+    // Return the result as an integer
+    return static_cast<int>(result);
 }
-
-
